@@ -313,3 +313,22 @@ Therefor observe the following UP-DOWN cycle:
 3. DOWN Collabora
 4. DOWN Sync-in
 
+### External bridge network 'sync_in_network'
+
+If the Docker bridge network 'sync_in_network' is defined externally, rather than inside the sync-in-docker, then there is no  interdependency between Sync-in and Collabora. Each can join the pre-existing bridge network sync_in_network independently.
+
+In order to achieve this:
+
+- DOWN both containers
+- Manually create the docker bridge network 'sync_in_network'
+- Modify the compose file 'sync-in-docker' similarly to 'collabora'
+
+```
+networks:
+  sync_in_network:
+    external: true
+  web-proxy:
+    external: true
+```
+
+- UP both containers
